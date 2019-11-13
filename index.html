@@ -121,6 +121,27 @@
         </ul>
 </div>
       
+<!-- The core Firebase JS SDK -->
+<script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+<!-- Firebase auth and firestore -->
+<script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-firestore.js"></script>
+
+<script>
+  // Web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDMngbBbciVrpcpqwnXv_huV9oqcr2B2GM",
+    authDomain: "fir-auth-a7f4c.firebaseapp.com",
+    databaseURL: "https://fir-auth-a7f4c.firebaseio.com",
+    projectId: "fir-auth-a7f4c"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  // Auth and firestore references 
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+</script>
 <!-- JavaScript files -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="js/auth.js"></script>
