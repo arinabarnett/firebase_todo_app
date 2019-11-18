@@ -1,11 +1,37 @@
+
+
 // Authentication status changes
 
 auth.onAuthStateChanged(user => {
   if(user) {
-    console.log('User logged in: ', user);
+    db.collection('tasks').onSnapshot(snapshot => {
+      setupTasks(snapshot.docs);
+      setupUI(user);
+    });
+    
   } else {
-    console.log('User logged out');
+    setupUI();
+    setupTasks([]);
   }
+})
+
+// Create new task
+
+const createForm = document.querySelector('#create-form');
+createForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  db.collection('tasks').add({
+    title: createForm['title'].value,
+    description: createForm['description'].value
+  }).then(() => {
+    // Close modal and reset form
+    const modal = document.querySelector('#modal-create');
+    M.Modal.getInstance(modal).close();
+    createForm.reset();
+  }).catch(err => {
+    console.log(err.message);
+  })
 })
 
 // Sign up
