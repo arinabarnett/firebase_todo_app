@@ -7,13 +7,14 @@ auth.onAuthStateChanged(user => {
     db.collection('tasks').onSnapshot(snapshot => {
       setupTasks(snapshot.docs);
       setupUI(user);
+    }, err => {
+      console.log(err.message)
     });
-    
   } else {
     setupUI();
     setupTasks([]);
   }
-})
+});
 
 // Create new task
 
@@ -29,10 +30,8 @@ createForm.addEventListener('submit', (e) => {
     const modal = document.querySelector('#modal-create');
     M.Modal.getInstance(modal).close();
     createForm.reset();
-  }).catch(err => {
-    console.log(err.message);
-  })
-})
+  });
+});
 
 // Sign up
 
@@ -46,10 +45,14 @@ signupForm.addEventListener('submit', (e) => {
 
   // Sign up the user
   auth.createUserWithEmailAndPassword(email, password).then(cred => {
+    return db.collection('users').doc(cred.user.uid).set({
+      bio: signupForm['signup-bio'].value
+    });
+  }).then(() => {
     const modal = document.querySelector('#modal-signup');
     M.Modal.getInstance(modal).close();
     signupForm.reset();
-  })
+  });
 });
 
 // Logout
