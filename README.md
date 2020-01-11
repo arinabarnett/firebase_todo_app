@@ -1,0 +1,1 @@
+This is a simple to-do task tracker in JavaScript with Materialize and Firebase authentication that has some additional functionality for users and admins. You can view this project here: https://arinabarnett.github.io/firebase_todo_app/
